@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+// for npm roboto-fontface package (to load local files)
+$roboto-font-path: "~roboto-fontface/fonts" !default;
+@import "~roboto-fontface/css/roboto/sass/roboto-fontface";
+
+// Body
+* {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.row {
+    padding: 20px 30px 20px 30px !important
+}
+
+nav {
+    padding: 0 !important;
+}

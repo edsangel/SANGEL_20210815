@@ -1,0 +1,27 @@
+{
+  "name": "video-stream-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "video-stream-api.js",
+  "author": {
+    "name": "Ervic Sangel",
+    "email": "ervic.sangel@gmail.com"
+  },
+  "scripts": {
+    "dev": "nodemon video-stream-api.js env=dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "multer": "^1.4.3",
+    "node-postgres": "^0.6.2",
+    "nodemon": "^2.0.12",
+    "pg": "^8.7.1",
+    "properties-reader": "^2.2.0",
+    "sharp": "^0.28.3"
+  }
+}

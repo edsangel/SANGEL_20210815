@@ -1,0 +1,21 @@
+.video-title {
+  overflow: auto;
+  word-break: break-all;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.video-description {
+  overflow: auto;
+  word-break: break-all;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.video-title, .video-description {
+  padding: 5px;
+}
+
+.required {
+  color: red;
+}

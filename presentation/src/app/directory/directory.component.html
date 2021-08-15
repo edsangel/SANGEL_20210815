@@ -1,0 +1,33 @@
+<div class="row">
+  <h2 class="directory-header-title">Videos to watch</h2>
+  <ng-container class="col-md-12" *ngIf="hasError">
+    <div class="alert alert-danger fade show">
+      <div><strong>NOTICE</strong></div>
+      <p>The video that you're trying to view no longer exists.</p>
+    </div>
+  </ng-container>
+</div>
+<ng-container *ngIf="displayLoadingSpinner">
+  <app-loading-spinner loadingMessage="Loading your videos. Please wait."></app-loading-spinner>
+</ng-container>
+<ng-container class="row" *ngIf="!displayLoadingSpinner && videos.length === 0">
+  <div class="col-md-12">
+    <div class="alert alert-success alert-info fade show">
+      <div><strong>HELLO, THERE!</strong></div>
+      <p>You dont't have any videos yet. Click on the "Upload New Video" button at the top right corner, and add your wonderful vidoes to our list.</p>
+    </div>
+  </div>
+</ng-container>
+<div *ngIf="!displayLoadingSpinner && videos.length > 0" class="row display-wrapper">
+  <ng-container *ngFor="let video of videos">
+    <div class="video-details-wrapper" (click)="goto(video.id)">
+      <img class="video-thumbnail" alt="Video thumbnail" [src]="sanitize('data:image/png;base64,' + imgSrcJson[video.id])">
+      <div class="video-thumbnail__overlay">
+        <div class="video-thumbnail__overlay__text">{{ trimValue(video.metadata.file.title) }}</div>
+      </div>
+      <div class="video-title">{{ trimValue(video.metadata.file.title) }}</div>
+      <div class="video-description">{{ trimValue(video.metadata.file.description) }}</div>
+      <div class="badge badge-pill badge-warning">#{{ displayCategory(video.metadata.file.category) }}</div>
+    </div>
+  </ng-container>
+</div>

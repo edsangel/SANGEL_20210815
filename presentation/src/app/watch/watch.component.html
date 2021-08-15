@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="video-wrapper">
+    <app-loading-spinner *ngIf="displayLoadingSpinner" loadingMessage="Streaming video..."></app-loading-spinner>
+
+    <ng-container class="col-md-12" *ngIf="uploadSuccess">
+      <div class="alert alert-success alert-dismissible fade show">
+        <div><strong>SUCCESS</strong></div>
+        <p>Your video has been successfully uploaded. Enjoy watching!</p>
+      </div>
+    </ng-container>
+
+    <div class="row">
+        <ng-container *ngIf="!displayLoadingSpinner">
+          <video *ngIf="videoSource" class="col-md-12" id="videoPlayer" width="854" height="480" controls muted autoplay>
+            <source [src]="videoSource" type="video/mp4" />
+          </video>
+          <div class="col-md-12">
+            <div class="video-title">{{ video.title }}</div>
+            <div class="video-description">{{ video.description }}</div>
+            <div class="badge badge-pill badge-warning">#{{ displayCategory(video.category) }}</div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<ng-container *ngIf="displayLoadingSpinner">
+  <app-loading-spinner></app-loading-spinner>
+</ng-container>
+<div class="row" *ngIf="!displayLoadingSpinner">
+  <div class="col-lg-6">
+    <h4>Tell us about your video</h4>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <label for="title">Title</label><span class="required">*</span>
+        <input [(ngModel)]="title" name="title" type="text" class="form-control" placeholder="Make it stand out" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <label for="description">Description</label><span> (Optional)</span>
+        <textarea [(ngModel)]="description" name="description" class="form-control textarea" placeholder="Tell us more about your video"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <label>Category</label><span class="required">*</span>
+        <select [(ngModel)]="category" class="form-control custom-select" aria-label="Default select example">
+            <option value="null" selected>Please select category</option>
+            <option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
+            </option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <input hidden type="file" id="file" (change)="onFileSelected($event)" #fileUpload>
+        <button class="btn btn-outline-default" (click)="fileUpload.click()">Select video</button>
+        {{fileName || "No video file uploaded yet."}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <button class="btn btn-primary" [disabled]="!canSubmit()" (click)="upload()">Upload</button>
+        <button class="btn btn-secondary" routerLink="/">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <h4>The video and its details will be displayed like this</h4>
+    <ng-container class="col-md-12" *ngIf="hasError">
+      <div class="alert alert-danger fade show">
+        <div><strong>NOTICE</strong></div>
+        <p>The video that you're trying to upload is not allowed. The file must either be in MP4 or MOV format and does not exceed 200MB.</p>
+      </div>
+    </ng-container>
+    <div class="col-md-12">
+      <app-loading-spinner *ngIf="displayVideoLoader" loadingMessage="Loading your video..."></app-loading-spinner>
+      <video id="videoPlayer" width="640" height="360" controls muted autoplay>
+        <source [src]="sanitize(url)" *ngIf="url" type="video/mp4" />
+      </video>
+      <div class="video-title">{{ title }}</div>
+      <div class="video-description">{{ description }}</div>
+      <div *ngIf="category" class="badge badge-pill badge-warning">#{{ displayCategory(category) }}</div>
+    </div>
+  </div>
+</div>
