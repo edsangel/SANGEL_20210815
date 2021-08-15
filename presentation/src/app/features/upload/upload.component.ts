@@ -1,10 +1,9 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { finalize, map } from 'rxjs/operators';
-import { VideoStreamApiService } from '../service/video-stream-api.service';
-import { CategoryService } from '../service/category.service';
+
+import { VideoStreamApiService } from '../../shared/service/video-stream-api.service';
+import { CategoryService } from '../../shared/service/category.service';
 
 @Component({
   selector: 'app-upload',
@@ -12,20 +11,18 @@ import { CategoryService } from '../service/category.service';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent {
-
   title: string = '';
   description: string = '';
+  categories: any;
   category: any;
   fileName = '';
-  uploadProgress: any;
-  uploadSub: any;
   url: any;
+  file: File | undefined;
+
+  // flags
   displayLoadingSpinner: boolean = true;
   displayVideoLoader: boolean = false;
   hasError: boolean = false;
-  file: File | undefined;
-
-  categories: any;
 
   constructor(
     private router: Router,
@@ -66,35 +63,24 @@ export class UploadComponent {
       formData.append('description', this.description);
       formData.append('category', this.category);
       formData.append('video', this.file);
-      const upload$ = this.api.uploadVideo(formData).pipe(finalize(() => this.reset()));
 
-      this.uploadSub = upload$.subscribe(
+      this.api.uploadVideo(formData).subscribe(
         (data: any) => this.router.navigateByUrl(`/watch/${data['file'].fileid}?uploadSuccess=true`),
         () => this.hasError = true
       );
     }
   }
 
-  cancelUpload() {
-    this.uploadSub.unsubscribe();
-    this.reset();
-  }
-
-  reset() {
-    this.uploadProgress = null;
-    this.uploadSub = null;
-  }
-
   displayCategory() {
     return this.categoryService.translateCategories(this.category);
-  }
-  
-  sanitize(url: string) {
-    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   canSubmit() {
     return this.title && this.category && this.file && !this.hasError;
+  }
+  
+  sanitize(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   private isAllowed(file: any) {

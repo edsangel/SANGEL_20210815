@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, Subscription } from 'rxjs';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { CategoryService } from '../service/category.service';
-import { VideoStreamApiService } from '../service/video-stream-api.service';
+
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { CategoryService } from '../../shared/service/category.service';
+import { VideoStreamApiService } from '../../shared/service/video-stream-api.service';
 
 @Component({
   selector: 'app-directory',

@@ -1,9 +1,14 @@
 const Error = require("../error/error");
 const { ERROR_CODE, ERROR_NAME } = require("../error/error.const");
 
+const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
 const properties = require("./properties-utils");
+
+if (!fs.existsSync(properties.get("file.upload.path"))){
+  fs.mkdirSync(properties.get("file.upload.path"));
+}
 
 const fileDestination = properties.get("file.upload.path");
 

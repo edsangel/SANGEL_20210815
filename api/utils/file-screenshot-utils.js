@@ -13,6 +13,11 @@ function takeScreenshot(file, id, sizes, timemarks) {
   sizes.forEach((size) => {
     const filename = `${id}_thumbnail_${size}.png`;
     const folder = path.resolve(properties.get("file.screenshot.path"));
+
+    if (!fs.existsSync(folder)){
+      fs.mkdirSync(folder);
+    }
+
     ffmpeg(file)
       .on("error", (err) => {
         const error = new Error(err.code, err.name, err.message);

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryService } from '../service/category.service';
-import { VideoStreamApiService } from '../service/video-stream-api.service';
+
+import { CategoryService } from '../../shared/service/category.service';
+import { VideoStreamApiService } from '../../shared/service/video-stream-api.service';
 
 @Component({
   selector: 'app-watch',
@@ -11,6 +12,8 @@ import { VideoStreamApiService } from '../service/video-stream-api.service';
 export class WatchComponent implements OnInit {
   videoSource: any = undefined;
   video: any = {};
+
+  // flags
   displayLoadingSpinner: boolean = true;
   uploadSuccess: boolean = false;
 

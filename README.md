@@ -10,6 +10,7 @@ The functionalities are as follow:
    4. Category
 2. Stream the selected video
 3. Upload new video
+4. Create three thumbnails with varying sizes (65x65, 128x128, 256x256) and save the thumbnails to the database
 
 ## Limitations
 `video-stream` only allows .mp4 and .mov file format and up to 200MB.
